@@ -25,6 +25,7 @@ using namespace std;
 
 #endif /* main_h */
 
+
 class Tetris
 {
 public:
@@ -36,9 +37,12 @@ public:
 	int GetScore();
 	int LinesCleared();
 
+	void SpawnActive();
+	void Falling();
 	void NextStep();
 
 private:
 	int score = 0;
 	int clearedLines = 0;
+	int x, y;
 };

@@ -19,10 +19,39 @@ Tetris* game = new Tetris;
 
 int main(int argc, const char * argv[])
 {
+	string input;
+
 	while(1)
 	{
-//		IN.Read(200);
-		cin >> IN.buffer; cin.ignore();
+		if(!input.empty())
+		{
+			int minDist = input.length();
+			string str;
+
+			for(auto it : commands)
+			{
+				if(input.find(it.first) != string::npos)
+				{
+					minDist = min(minDist, (int)input.find(it.first));
+					str = it.first;
+
+					if(minDist == 0) break;
+				}
+			}
+
+			if(minDist == input.length())
+			{
+				cin >> input;
+				continue;
+			}
+			input = input.substr(str.length());
+			strcpy(IN.buffer, str.c_str());
+		}
+		else
+		{
+			cin >> input;	 cin.ignore();
+			continue;
+		}
 		IN.io = (IO)commands[IN.buffer];
 
 		switch(IN.io)
@@ -49,6 +78,10 @@ int main(int argc, const char * argv[])
 
 			case IO::PRINT:
 				game->M.Print();
+				break;
+
+			case IO::PRINT_WITH_ACTIVE:
+				game->M.PrintWithActive(game->active->GetSize(), game->active->GetPos(), *game->active);
 				break;
 
 			case IO::QUIT:
@@ -191,6 +224,7 @@ int Tetris::LinesCleared()
 	return clearedLines;
 }
 
+
 void Tetris::NextStep()
 {
 	for(int i=H_SIZE-1; i>=0; i--)
@@ -204,3 +238,18 @@ void Tetris::NextStep()
 		}
 	}
 };
+
+
+void Tetris::SpawnActive()
+{
+	pair<int, int> sz = game->active->GetSize();
+	pair<int, int> pos = game->active->GetPos();
+
+	M.PrintWithActive(sz, pos, *active);
+}
+
+
+void Tetris::Falling()
+{
+	active->SetPos(active->GetPos().first + 1, active->GetPos().second);
+}

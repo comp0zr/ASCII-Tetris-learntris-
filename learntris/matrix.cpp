@@ -30,6 +30,37 @@ void Matrix::Print()
 	}
 }
 
+
+void Matrix::PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape &active)
+{
+	LOG(pos.first << ", " << pos.second << endl);
+
+	for(int i=0; i<22; i++)
+	{
+		for(int j=0; j<10; j++)
+		{
+			if(i >= pos.first  && i < pos.first + sz.first)
+			{
+				if(j >= pos.second && j < pos.second + sz.second)
+				{
+					cout << (char)toupper(active.CharAt(i, j - pos.second)) << ' ';
+					continue;
+				}
+			}
+			cout << matrix[i][j] << ' ';
+		}
+		cout << endl;
+	}
+//	for(int i=0; i<sz.first; i++)
+//	{
+//		for(int j=pos.second; j<pos.second + sz.second; j++)
+//		{
+//			matrix[i][j] = active.CharAt(i, j - pos.second);
+//		}
+//	}
+}
+
+
 void Matrix::Modify()
 {
 	cin.clear();
@@ -39,7 +70,8 @@ void Matrix::Modify()
 		string s;
 		try {
 			getline(cin, s, '\n');
-			if(s.length() < 10 || s.length() > 20 || s.find_first_not_of(".bcgmory ") != string::npos)
+
+			if(s.find_first_not_of(".bcgmory ") != string::npos)
 			{	throw ('L');	}
 
 		} catch(char L) {

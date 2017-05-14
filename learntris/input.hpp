@@ -15,6 +15,7 @@
 #include <map>
 #include <stdlib.h>
 #include <iostream>
+#include <deque>
 
 enum class IO
 {
@@ -26,6 +27,7 @@ enum class IO
 	LINES = 'l',
 	NEWLINE = ';',
 	PRINT = 'p',
+	PRINT_WITH_ACTIVE = 'P',
 	QUIT = 'q',
 	ROTATE_CLOCKWISE = ')',
 	ROTATE_COUNTER = '(',
@@ -47,7 +49,7 @@ static std::map<std::string, IO> commands =
 {
 	{	"c",		IO::CLEAR				},
 	{	"g",		IO::GIVEN				},
-//	{	";",		IO::NEWLINE			},
+	{	";",		IO::NEWLINE			},
 	{	"I",		IO::SHAPE_I				},
 	{	"J",		IO::SHAPE_J				},
 	{	"L",		IO::SHAPE_L				},
@@ -57,6 +59,7 @@ static std::map<std::string, IO> commands =
 	{	"Z",		IO::SHAPE_Z				},
 	{	"?n",	IO::LINES				},
 	{	"p",		IO::PRINT				},
+	{	"P",		IO::PRINT_WITH_ACTIVE	},
 	{	"q",		IO::QUIT				},
 	{	")",		IO::ROTATE_CLOCKWISE },
 	{	"(",		IO::ROTATE_COUNTER	},
@@ -74,10 +77,12 @@ public:
 	InputParser();
 
 	int Read(int maxSize);
-	char* Read(int maxSize, char delim);
-
+	char* ReadLine(int maxSize, char delim);
+	char* Read();
 
 	char buffer[200];
+	std::deque<char*> command_queue;
+
 	IO io;
 };
 

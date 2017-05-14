@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include "constants.h"
+#include "shape.hpp"
 
 using namespace std;
 
@@ -25,8 +26,10 @@ public:
 	void Print();
 	void Modify();
 	void Clear();
-	vector<vector<char>> matrix; //(H_SIZE, vector<char>(W_SIZE, '.'));
-//	char matrix[H_SIZE][W_SIZE];
+
+	void PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape &active);
+
+	vector<vector<char>> matrix;
 };
 
 

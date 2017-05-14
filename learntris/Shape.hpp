@@ -28,18 +28,43 @@ public:
 
 	Shape()
 	{
-		graphic = shape(4, vector<char>(4, '.'));
+		graphic = shape(h, vector<char>(w, '.'));
 		graphic =	{{	'.',	'.',	'.',	'.'	},
 					{	'.',	'.',	'.',	'.'	},
 					{	'.',	'.',	'.',	'.'	},
 					{	'.',	'.',	'.',	'.'	}};
 	}
-	Shape(int h_sz, int w_sz, char col) : h(h_sz), w(w_sz), color(col) {}
+	Shape(int h_sz, int w_sz, char col) : h(h_sz), w(w_sz), color(col)
+	{
+		x = (10 - w) / 2;
+		y = 0;
+	}
 
 	void Display()
 	{
 		for(auto r : graphic)
 		{PRINT_ARR(r, 0); std::cout << endl;}
+	}
+
+	pair<int, int> GetSize()
+	{
+		return { h, w };
+	}
+
+	pair<int, int> GetPos()
+	{
+		return { y,  x };
+	}
+
+	void SetPos(int next_y, int next_x)
+	{
+		y = next_y;
+		x = next_x;
+	}
+
+	char CharAt(int y, int x)
+	{
+		return graphic[y][x];
 	}
 
 	virtual void Rotate(int r) {};
@@ -48,6 +73,7 @@ public:
 protected:
 	char color;
 	int w, h;
+	int x, y;
 	shape graphic;
 
 	int rotation = 0;
@@ -98,16 +124,17 @@ public:
 				break;
 
 			case 3:
-				graphic	 =	{{	'.',	'c',	'.',	'.'},
-							{	'.',	'c',	'.',	'.'},
-							{	'.',	'c',	'.',	'.'},
-							{	'.',	'c',	'.',	'.'}};
+				graphic	 =	{{	'.',	'c',	'.',	'.'	},
+							{	'.',	'c',	'.',	'.'	},
+							{	'.',	'c',	'.',	'.'	},
+							{	'.',	'c',	'.',	'.'	}};
 				break;
 		}
 	}
 
 protected:
 private:
+	int w = 4, h = 4;
 };
 
 
@@ -173,6 +200,7 @@ public:
 
 protected:
 private:
+	int h = 3, w = 3;
 };
 
 
@@ -208,34 +236,35 @@ public:
 
 			case 1:
 				graphic =
-			{
-				{	'.',	'o',	'.',	},
-				{	'.',	'o',	'.',	},
-				{	'.',	'o',	'o'	}
-			};
+				{
+					{	'.',	'o',	'.',	},
+					{	'.',	'o',	'.',	},
+					{	'.',	'o',	'o'	}
+				};
 				break;
 
 			case 2:
 				graphic =
-			{
-				{	'.',	'.',	'.',	},
-				{	'o',	'o',	'o',	},
-				{	'o',	'.',	'.'	}
-			};
+				{
+					{	'.',	'.',	'.',	},
+					{	'o',	'o',	'o',	},
+					{	'o',	'.',	'.'	}
+				};
 				break;
 
 			case 3:
 				graphic =
-			{
-				{	'o',	'o',	'.',	},
-				{	'.',	'o',	'.',	},
-				{	'.',	'o',	'.'	}
-			};
+				{
+					{	'o',	'o',	'.',	},
+					{	'.',	'o',	'.',	},
+					{	'.',	'o',	'.'	}
+				};
 				break;
 		}
 	}
 protected:
 private:
+	int w = 3, h = 3;
 };
 
 
@@ -251,6 +280,7 @@ public:
 
 protected:
 private:
+	int w = 2, h = 2;
 };
 
 
@@ -315,6 +345,7 @@ public:
 
 protected:
 private:
+	int w = 3, h = 3;
 };
 
 
@@ -378,6 +409,7 @@ public:
 	}
 protected:
 private:
+	int w = 3, h = 3;
 };
 
 
@@ -441,6 +473,7 @@ public:
 	}
 protected:
 private:
+	int w = 3, h = 3;
 };
 
 
