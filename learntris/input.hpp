@@ -18,14 +18,24 @@
 
 enum class IO
 {
+	CLEAR = 'c',
 	GIVEN = 'g',
+	LINES = 'l',
 	PRINT = 'p',
-	QUIT = 'q'
+	QUIT = 'q',
+	SCORE = 's',
+	STEP = 'S'
 };
 
 static std::map<std::string, IO> commands =
 {
-	{("g"), IO::GIVEN}, {("p"), IO::PRINT}, {("q"), IO::QUIT}
+	{	("c"),	IO::CLEAR	},
+	{	("g"), 	IO::GIVEN	},
+	{	("?n"),	IO::LINES	},
+	{	("p"),	IO::PRINT	},
+	{	("q"),	IO::QUIT	},
+	{	("?s"),	IO::SCORE	},
+	{	("s"),	IO::STEP		}
 };
 
 

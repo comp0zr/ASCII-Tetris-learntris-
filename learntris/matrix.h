@@ -23,7 +23,8 @@ public:
 	Matrix();
 
 	void Print();
-
+	void Modify();
+	void Clear();
 	vector<vector<char>> matrix; //(H_SIZE, vector<char>(W_SIZE, '.'));
 //	char matrix[H_SIZE][W_SIZE];
 };

@@ -29,3 +29,40 @@ void Matrix::Print()
 		cout << endl;
 	}
 }
+
+void Matrix::Modify()
+{
+	cin.clear();
+
+	for(int i=0; i<22; i++)
+	{
+		string s;
+		try {
+			getline(cin, s, '\n');
+			if(s.length() < 10 || s.length() > 20 || s.find_first_not_of(".bcgmory ") != string::npos)
+			{	throw ('L');	}
+
+		} catch(char L) {
+			cerr << "Invalid input. Please try again: ";
+			continue;
+		}
+
+		int index = 0;
+		for(auto c : s)
+		{
+			if(isalpha(c) || c == '.')
+			{
+				matrix[i][index] = c;
+				index++;
+			}
+		}
+//		PRINT_ARR(matrix[i], 1);
+//		cerr << endl;
+	}
+}
+
+void Matrix::Clear()
+{
+	matrix.clear();
+	matrix = vector<vector<char>>(22, vector<char>(10, '.'));
+}

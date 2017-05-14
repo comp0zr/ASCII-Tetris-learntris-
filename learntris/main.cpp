@@ -12,11 +12,13 @@
 #include "input.hpp"
 
 InputParser IN;
+Tetris* game = new Tetris;
+
 
 int main(int argc, const char * argv[])
 {
-	Matrix M;
-	char buffer[200];
+//	Matrix M;
+//	char buffer[200];
 
 	while(1)
 	{
@@ -24,68 +26,69 @@ int main(int argc, const char * argv[])
 
 		switch(IN.io)
 		{
+			case IO::CLEAR:
+				game->M.Clear();
+				break;
+
 			case IO::GIVEN:
-			{
-				cin.clear();
-
-				for(int i=0; i<22; i++)
-				{
-					cout << i << "| " << endl;
-					cin.ignore();
-
-					string s;
-					getline(cin, s);
-
-					int index = 0;
-					for(auto c : s)
-					{
-						if(isalnum(c))
-						{
-							M.matrix[i][index] = c;
-							index++;
-						}
-					}
-					PRINT_ARR(M.matrix[i], 1);
-					cerr << endl;
-				}
+				game->M.Modify();
 				break;
-				for(int i=0; i<22; i++)
-				{
-//					char* line;
-					//= IN.Read((int)W_SIZE, ' ');
 
-					for(int j=0; j<10; j++)
-					{
-						cin >> M.matrix[i][j];
-						//M.matrix[i].assign(line, line + strlen(line));
-					}
-					PRINT_ARR(M.matrix[i], 1);
-					cerr << endl;
-				}
+			case IO::LINES:
+				game->LinesCleared();
 				break;
-			}
 
 			case IO::PRINT:
-				M.Print();
+				game->M.Print();
 				break;
 
 			case IO::QUIT:
 				exit(0);
 				break;
-		}
 
-//		if(strcmp(buffer, "q") == 0)
-//		{
-//			exit(0);
-//		}
-//		else if(strcmp(buffer, "p") == 0)
-//		{
-//			M.Print();
-//		}
-//		else if(strcmp(buffer, "g") == 0)
-//		{
-//
-//		}
+			case IO::SCORE:
+				game->GetScore();
+				break;
+
+			case IO::STEP:
+				game->NextStep();
+				break;
+
+			default:
+				break;
+		}
 	}
 	return 0;
 }
+
+
+Tetris::Tetris()
+{
+	score = 0;
+}
+
+int Tetris::GetScore()
+{
+	cout << score << endl;
+	return score;
+}
+
+int Tetris::LinesCleared()
+{
+	cout << clearedLines << endl;
+	return clearedLines;
+}
+
+void Tetris::NextStep()
+{
+	for(int i=H_SIZE-1; i>=0; i--)
+	{
+		if(std::count(M.matrix[i].begin(), M.matrix[i].end(), '.') == 0)
+		{
+			M.matrix[i] = vector<char>(10, '.');
+			score += 100;
+			clearedLines++;
+//			if(i > 0) M.matrix[i] = M.matrix[i-1];
+		}
+	}
+};

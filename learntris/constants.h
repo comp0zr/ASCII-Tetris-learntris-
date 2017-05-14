@@ -22,7 +22,7 @@
 #endif
 
 #define PRINT_ARR(arr, db) for(auto it : arr) {if(db) { cerr << it << ' '; } else{ cout << it << ' ';}};
-
+#define ALL(iter) (iter.begin(), iter.end())
 
 #define W_SIZE 10
 #define H_SIZE 22
