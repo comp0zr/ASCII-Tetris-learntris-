@@ -39,6 +39,7 @@ public:
 
 	void SpawnActive();
 	void Falling();
+	void StopActive();
 	void NextStep();
 
 private:

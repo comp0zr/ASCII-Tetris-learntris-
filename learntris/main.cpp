@@ -46,10 +46,10 @@ int main(int argc, const char * argv[])
 			continue;
 		}
 
-/*----------------------------------------------------------------------------------------------------------------------------------------------*/
-/*							INPUT FUNCTIONS AND GAME LOOP:
-/*
-/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------*
+ *							INPUT FUNCTIONS AND GAME LOOP:
+ *
+ *----------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 		IN.io = (IO)commands[IN.buffer];
@@ -89,12 +89,34 @@ int main(int argc, const char * argv[])
 				break;
 
 			case IO::ROTATE_CLOCKWISE:
+			{
+				pair<int, int> pos = game->active->GetPos();
+				pair<int, int> sz = game->active->GetSize();
+
 				game->active->Rotate(1);
+
+				if(pos.first + sz.first == 23) game->active->SetPos(pos.first-1, pos.second);
+				if(pos.second + sz.second == 11)
+				{
+					game->active->SetPos(pos.first, pos.second-1);
+				}
 				break;
+			}
 
 			case IO::ROTATE_COUNTER:
+			{
+				pair<int, int> pos = game->active->GetPos();
+				pair<int, int> sz = game->active->GetSize();
+
 				game->active->Rotate(-1);
+
+				if(pos.first + sz.first == 23) game->active->SetPos(pos.first-1, pos.second);
+				if(pos.second == -1)
+				{
+					game->active->SetPos(pos.first, pos.second+1);
+				}
 				break;
+			}
 
 			case IO::SCORE:
 				game->GetScore();
@@ -155,13 +177,24 @@ int main(int argc, const char * argv[])
 				pair<int, int> sz = game->active->GetSize();
 
 				int y = pos.first, x = pos.second;
-				if(pos.first == 21) break;
 
-				for( ; x < pos.second + sz.second; x++)
+				if(pos.first + sz.first > 22)
 				{
-					if(game->M.matrix[y+1][x] != '.')
+					game->StopActive();
+					break;
+				}
+
+				for(int index = 0; index < sz.second ; index++)
+				{
+					if(pos.first + sz.first == 22 || game->M.matrix[y + sz.first][index] != '.')
 					{
-						goto next;
+						if(game->active->CharAt(sz.first - 1, index) == '.') continue;
+						else
+						{
+							game->StopActive();
+							goto next;
+						}
+						break;
 					}
 				}
 				game->active->SetPos(y + 1, pos.second);
@@ -214,8 +247,9 @@ int main(int argc, const char * argv[])
 				game->NextStep();
 				break;
 
-			default:
-				break;
+
+			default:	break;
+
 		}
 		next:
 		continue;
@@ -314,4 +348,25 @@ void Tetris::SpawnActive()
 void Tetris::Falling()
 {
 //	active->SetPos(active->GetPos().first + 1, active->GetPos().second);
+}
+
+
+void Tetris::StopActive()
+{
+
+	pair<int, int> pos = active->GetPos();
+	shape graphic = active->Display();
+
+	for(int i=0; i < active->GetSize().first; i++)
+	{
+		for(int j=0; j < active->GetSize().second; j++)
+		{
+			if(pos.first + i < 22 && pos.second + j >= 0 && pos.second + j < 10)
+			{
+				M.matrix[pos.first + i][pos.second + j] = graphic[i][j];
+			}
+		}
+	}
+	 
+	//if(active->GetPos().first + active-> )
 }

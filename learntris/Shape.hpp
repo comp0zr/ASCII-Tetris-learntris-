@@ -40,10 +40,12 @@ public:
 		y = 0;
 	}
 
-	void Display()
+	shape Display()
 	{
 		for(auto r : graphic)
 		{PRINT_ARR(r, 0); std::cout << endl;}
+
+		return graphic;
 	}
 
 	pair<int, int> GetSize()
