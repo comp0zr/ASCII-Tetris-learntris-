@@ -33,11 +33,6 @@ void Matrix::Print()
 
 void Matrix::PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape *active)
 {
-	LOG(pos.first << ", " << pos.second << endl);
-	LOG(sz.first << ", " << sz.second << endl);
-	//	LOG(22 - sz.first << endl);
-//	LOG(pos.first << "......" << pos.first + sz.first << endl << pos.second << "......" << pos.second + sz.second << endl);
-
 	for(int i=0; i<22; i++)
 	{
 		for(int j=0; j<10; j++)

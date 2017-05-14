@@ -1,13 +1,6 @@
 // http://en.cppreference.com/w/cpp/language/using_declaration
-//
-//  main.cpp
-//  learntris
-//
-//  Created by Administrator on 5/13/17.
-//
-//
 
-//#include <iostream>
+
 #include "main.h"
 #include "matrix.h"
 #include "input.hpp"
@@ -52,6 +45,13 @@ int main(int argc, const char * argv[])
 			cin >> input;	 cin.ignore();
 			continue;
 		}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*							INPUT FUNCTIONS AND GAME LOOP:
+/*
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
 		IN.io = (IO)commands[IN.buffer];
 
 		switch(IN.io)
@@ -175,11 +175,16 @@ int main(int argc, const char * argv[])
 				pair<int, int> sz = game->active->GetSize();
 
 				int y = pos.first, x = pos.second;
-				if(pos.second == 0) break;
+				if(pos.second == -1) break;
 
-				for( ; y < pos.first + sz.first; y++)
+				for(int index = 0 ; y < pos.first + sz.first; index++, y++)
 				{
-					if(game->M.matrix[y][x - 1] != '.') goto next;
+					if(x == 0 || game->M.matrix[y][x-1] != '.')
+					{
+						if(game->active->CharAt(index, 0) == '.') continue;
+						else goto next;
+					}
+//					if(game->M.matrix[y][x - 1] != '.') goto next;
 				}
 				game->active->SetPos(pos.first, x - 1);
 				break;
@@ -191,11 +196,15 @@ int main(int argc, const char * argv[])
 				pair<int, int> sz = game->active->GetSize();
 
 				int y = pos.first, x = pos.second;
-				if(pos.second == 9) break;
 
-				for( ; y < pos.first + sz.first; y++)
+				for(int index=0 ; y < pos.first + sz.first; y++, index++)
 				{
-					if(game->M.matrix[y][x + 1] != '.') goto next;
+					if(x + sz.second > 10) goto next;
+					if(x + sz.second == 10 || game->M.matrix[y][x + sz.second] != '.')
+					{
+						if(game->active->CharAt(index, sz.second-1) == '.') continue;
+						else goto next;
+					}
 				}
 				game->active->SetPos(pos.first, x + 1);
 				break;
@@ -288,7 +297,6 @@ void Tetris::NextStep()
 			M.matrix[i] = vector<char>(10, '.');
 			score += 100;
 			clearedLines++;
-//			if(i > 0) M.matrix[i] = M.matrix[i-1];
 		}
 	}
 };
