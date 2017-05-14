@@ -17,12 +17,6 @@ InputParser::InputParser()
 {}
 
 
-//void InputParser::Parse()
-//{
-//	while(getchar_unlocked())
-//}
-
-
 int InputParser::Read(int maxSize)
 {
 	int in;
@@ -31,7 +25,6 @@ int InputParser::Read(int maxSize)
 	{
 		in = cin.get();
 		*buffer = (char)in;
-
 //		cin.get(buffer, maxSize);
 //		cin.ignore(1, '\n');
 	} while(!isspace(in));

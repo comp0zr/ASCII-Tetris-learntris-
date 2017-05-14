@@ -25,7 +25,7 @@ int main(int argc, const char * argv[])
 	{
 		if(!input.empty())
 		{
-			int minDist = input.length();
+			int minDist = (int)input.length();
 			string str;
 
 			for(auto it : commands)
@@ -81,7 +81,7 @@ int main(int argc, const char * argv[])
 				break;
 
 			case IO::PRINT_WITH_ACTIVE:
-				game->M.PrintWithActive(game->active->GetSize(), game->active->GetPos(), *game->active);
+				game->M.PrintWithActive(game->active->GetSize(), game->active->GetPos(), game->active);
 				break;
 
 			case IO::QUIT:
@@ -149,6 +149,58 @@ int main(int argc, const char * argv[])
 				break;
 			}
 
+			case IO::SHIFT_DOWN:
+			{
+				pair<int, int> pos = game->active->GetPos();
+				pair<int, int> sz = game->active->GetSize();
+
+				int y = pos.first, x = pos.second;
+				if(pos.first == 21) break;
+
+				for( ; x < pos.second + sz.second; x++)
+				{
+					if(game->M.matrix[y+1][x] != '.')
+					{
+						goto next;
+					}
+				}
+				game->active->SetPos(y + 1, pos.second);
+				break;
+			}
+
+
+			case IO::SHIFT_LEFT:
+			{
+				pair<int, int> pos = game->active->GetPos();
+				pair<int, int> sz = game->active->GetSize();
+
+				int y = pos.first, x = pos.second;
+				if(pos.second == 0) break;
+
+				for( ; y < pos.first + sz.first; y++)
+				{
+					if(game->M.matrix[y][x - 1] != '.') goto next;
+				}
+				game->active->SetPos(pos.first, x - 1);
+				break;
+			}
+
+			case IO::SHIFT_RIGHT:
+			{
+				pair<int, int> pos = game->active->GetPos();
+				pair<int, int> sz = game->active->GetSize();
+
+				int y = pos.first, x = pos.second;
+				if(pos.second == 9) break;
+
+				for( ; y < pos.first + sz.first; y++)
+				{
+					if(game->M.matrix[y][x + 1] != '.') goto next;
+				}
+				game->active->SetPos(pos.first, x + 1);
+				break;
+			}
+
 			case IO::STEP:
 				game->NextStep();
 				break;
@@ -156,6 +208,8 @@ int main(int argc, const char * argv[])
 			default:
 				break;
 		}
+		next:
+		continue;
 	}
 	return 0;
 }
@@ -245,11 +299,11 @@ void Tetris::SpawnActive()
 	pair<int, int> sz = game->active->GetSize();
 	pair<int, int> pos = game->active->GetPos();
 
-	M.PrintWithActive(sz, pos, *active);
+	M.PrintWithActive(sz, pos, active);
 }
 
 
 void Tetris::Falling()
 {
-	active->SetPos(active->GetPos().first + 1, active->GetPos().second);
+//	active->SetPos(active->GetPos().first + 1, active->GetPos().second);
 }

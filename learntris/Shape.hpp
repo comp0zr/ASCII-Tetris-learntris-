@@ -64,6 +64,7 @@ public:
 
 	char CharAt(int y, int x)
 	{
+//		return 'x';
 		return graphic[y][x];
 	}
 

@@ -31,33 +31,26 @@ void Matrix::Print()
 }
 
 
-void Matrix::PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape &active)
+void Matrix::PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape *active)
 {
 	LOG(pos.first << ", " << pos.second << endl);
+	LOG(sz.first << ", " << sz.second << endl);
+	//	LOG(22 - sz.first << endl);
+//	LOG(pos.first << "......" << pos.first + sz.first << endl << pos.second << "......" << pos.second + sz.second << endl);
 
 	for(int i=0; i<22; i++)
 	{
 		for(int j=0; j<10; j++)
 		{
-			if(i >= pos.first  && i < pos.first + sz.first)
+			if(i >= pos.first && i < pos.first + sz.first && j >= pos.second && j < pos.second + sz.second)
 			{
-				if(j >= pos.second && j < pos.second + sz.second)
-				{
-					cout << (char)toupper(active.CharAt(i, j - pos.second)) << ' ';
-					continue;
-				}
+				cout << (char)toupper(active->CharAt(i - pos.first, j - pos.second)) << ' ';
+				continue;
 			}
 			cout << matrix[i][j] << ' ';
 		}
 		cout << endl;
 	}
-//	for(int i=0; i<sz.first; i++)
-//	{
-//		for(int j=pos.second; j<pos.second + sz.second; j++)
-//		{
-//			matrix[i][j] = active.CharAt(i, j - pos.second);
-//		}
-//	}
 }
 
 

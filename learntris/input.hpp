@@ -32,6 +32,9 @@ enum class IO
 	ROTATE_CLOCKWISE = ')',
 	ROTATE_COUNTER = '(',
 	SCORE = 's',
+	SHIFT_DOWN = 'v',
+	SHIFT_LEFT = '<',
+	SHIFT_RIGHT = '>',
 	STEP = '&',
 
 //	SHAPE TYPES
@@ -64,6 +67,9 @@ static std::map<std::string, IO> commands =
 	{	")",		IO::ROTATE_CLOCKWISE },
 	{	"(",		IO::ROTATE_COUNTER	},
 	{	"?s",		IO::SCORE				},
+	{	"v",		IO::SHIFT_DOWN		},
+	{	"<",		IO::SHIFT_LEFT			},
+	{	">",		IO::SHIFT_RIGHT			},
 	{	"s",		IO::STEP					},
 	{	"t",		IO::DISPLAY_ACTIVE		}
 };

@@ -27,7 +27,7 @@ public:
 	void Modify();
 	void Clear();
 
-	void PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape &active);
+	void PrintWithActive(pair<int, int> sz, pair<int, int> pos, Shape *active);
 
 	vector<vector<char>> matrix;
 };
