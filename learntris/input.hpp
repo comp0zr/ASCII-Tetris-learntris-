@@ -18,27 +18,38 @@
 
 enum class IO
 {
+//	MAIN COMMANDS
+
 	CLEAR = 'c',
+	DISPLAY_ACTIVE = 't',
 	GIVEN = 'g',
 	LINES = 'l',
 	PRINT = 'p',
 	QUIT = 'q',
 	SCORE = 's',
-	STEP = 'S'
+	STEP = 'S',
+
+//	SHAPE TYPES
+
+	SHAPE_I = 'I',
+	SHAPE_O = 'O'
 };
 
 static std::map<std::string, IO> commands =
 {
-	{	("c"),	IO::CLEAR	},
-	{	("g"), 	IO::GIVEN	},
-	{	("?n"),	IO::LINES	},
-	{	("p"),	IO::PRINT	},
-	{	("q"),	IO::QUIT	},
-	{	("?s"),	IO::SCORE	},
-	{	("s"),	IO::STEP		}
+	{	"c",		IO::CLEAR				},
+	{	"g",		IO::GIVEN				},
+	{	"I",		IO::SHAPE_I				},
+	{	"O",		IO::SHAPE_O			},
+	{	"?n",	IO::LINES				},
+	{	"p",		IO::PRINT				},
+	{	"q",		IO::QUIT				},
+	{	"?s",		IO::SCORE				},
+	{	"s",		IO::STEP					},
+	{	"t",		IO::DISPLAY_ACTIVE		}
 };
 
-
+/*
 //template <class T>
 //class cmd
 //{
@@ -47,9 +58,7 @@ static std::map<std::string, IO> commands =
 //public:
 //	cmd (T arg) {		data = arg;	  }
 //};
-
-
-
+*/
 
 class InputParser
 {

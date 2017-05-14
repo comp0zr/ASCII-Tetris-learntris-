@@ -10,7 +10,7 @@
 		0EAC79911EC799830063F4DC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC79901EC799830063F4DC /* main.cpp */; };
 		0EAC79981EC7A0040063F4DC /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC79961EC7A0040063F4DC /* matrix.cpp */; };
 		0EAC799C1EC7B7AC0063F4DC /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC799A1EC7B7AC0063F4DC /* input.cpp */; };
-		0EAC799F1EC834CF0063F4DC /* Shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC799D1EC834CF0063F4DC /* Shape.cpp */; };
+		0EAC799F1EC834CF0063F4DC /* shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC799D1EC834CF0063F4DC /* shape.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,8 +34,8 @@
 		0EAC79991EC7A2510063F4DC /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		0EAC799A1EC7B7AC0063F4DC /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		0EAC799B1EC7B7AC0063F4DC /* input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
-		0EAC799D1EC834CF0063F4DC /* Shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shape.cpp; sourceTree = "<group>"; };
-		0EAC799E1EC834CF0063F4DC /* Shape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shape.hpp; sourceTree = "<group>"; };
+		0EAC799D1EC834CF0063F4DC /* shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shape.cpp; sourceTree = "<group>"; };
+		0EAC799E1EC834CF0063F4DC /* shape.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shape.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +72,8 @@
 				0EAC79901EC799830063F4DC /* main.cpp */,
 				0EAC799A1EC7B7AC0063F4DC /* input.cpp */,
 				0EAC799B1EC7B7AC0063F4DC /* input.hpp */,
-				0EAC799D1EC834CF0063F4DC /* Shape.cpp */,
-				0EAC799E1EC834CF0063F4DC /* Shape.hpp */,
+				0EAC799D1EC834CF0063F4DC /* shape.cpp */,
+				0EAC799E1EC834CF0063F4DC /* shape.hpp */,
 				0EAC79971EC7A0040063F4DC /* matrix.h */,
 				0EAC79961EC7A0040063F4DC /* matrix.cpp */,
 				0EAC79991EC7A2510063F4DC /* constants.h */,
@@ -141,7 +141,7 @@
 				0EAC799C1EC7B7AC0063F4DC /* input.cpp in Sources */,
 				0EAC79911EC799830063F4DC /* main.cpp in Sources */,
 				0EAC79981EC7A0040063F4DC /* matrix.cpp in Sources */,
-				0EAC799F1EC834CF0063F4DC /* Shape.cpp in Sources */,
+				0EAC799F1EC834CF0063F4DC /* shape.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

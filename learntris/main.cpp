@@ -10,6 +10,7 @@
 #include "main.h"
 #include "matrix.h"
 #include "input.hpp"
+#include "shape.hpp"
 
 InputParser IN;
 Tetris* game = new Tetris;
@@ -17,8 +18,10 @@ Tetris* game = new Tetris;
 
 int main(int argc, const char * argv[])
 {
-//	Matrix M;
-//	char buffer[200];
+	Matrix M;
+
+//	S_I S;
+//	S.Display();
 
 	while(1)
 	{
@@ -28,6 +31,10 @@ int main(int argc, const char * argv[])
 		{
 			case IO::CLEAR:
 				game->M.Clear();
+				break;
+
+			case IO::DISPLAY_ACTIVE:
+				game->active->Display();
 				break;
 
 			case IO::GIVEN:
@@ -50,6 +57,20 @@ int main(int argc, const char * argv[])
 				game->GetScore();
 				break;
 
+			case IO::SHAPE_I:
+			{
+				Shape* temp = new S_I;
+				game->active = dynamic_cast<S_I*>(temp);
+				break;
+			}
+
+			case IO::SHAPE_O:
+			{
+				Shape* temp = new S_O;
+				game->active = dynamic_cast<S_O*>(temp);
+				break;
+			}
+
 			case IO::STEP:
 				game->NextStep();
 				break;
@@ -65,13 +86,22 @@ int main(int argc, const char * argv[])
 Tetris::Tetris()
 {
 	score = 0;
+	int randShape = 0; //rand() % NUM_SHAPES;
+
+	if(randShape == TYPE::I)
+	{
+		active = new Shape();
+	}
+	else if(randShape == 1) {}
 }
+
 
 int Tetris::GetScore()
 {
 	cout << score << endl;
 	return score;
 }
+
 
 int Tetris::LinesCleared()
 {

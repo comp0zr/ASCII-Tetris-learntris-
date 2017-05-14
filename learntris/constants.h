@@ -26,6 +26,7 @@
 
 #define W_SIZE 10
 #define H_SIZE 22
+#define NUM_SHAPES 7
 #define BLANK(x) string(x, '.')
 
 

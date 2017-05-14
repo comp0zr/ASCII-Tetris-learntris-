@@ -26,6 +26,7 @@ using namespace std;
 
 #include "input.hpp"
 #include "matrix.h"
+#include "shape.hpp"
 
 #endif /* main_h */
 
@@ -33,6 +34,7 @@ class Tetris
 {
 public:
 	Matrix M;
+	Shape* active;
 
 public:
 	Tetris();
