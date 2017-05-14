@@ -24,41 +24,48 @@ enum class IO
 	DISPLAY_ACTIVE = 't',
 	GIVEN = 'g',
 	LINES = 'l',
+	NEWLINE = ';',
 	PRINT = 'p',
 	QUIT = 'q',
+	ROTATE_CLOCKWISE = ')',
+	ROTATE_COUNTER = '(',
 	SCORE = 's',
-	STEP = 'S',
+	STEP = '&',
 
 //	SHAPE TYPES
 
 	SHAPE_I = 'I',
-	SHAPE_O = 'O'
+	SHAPE_J = 'J',
+	SHAPE_L = 'L',
+	SHAPE_T = 'T',
+	SHAPE_O = 'O',
+	SHAPE_S = 'S',
+	SHAPE_Z = 'Z'
 };
 
 static std::map<std::string, IO> commands =
 {
 	{	"c",		IO::CLEAR				},
 	{	"g",		IO::GIVEN				},
+//	{	";",		IO::NEWLINE			},
 	{	"I",		IO::SHAPE_I				},
+	{	"J",		IO::SHAPE_J				},
+	{	"L",		IO::SHAPE_L				},
 	{	"O",		IO::SHAPE_O			},
+	{	"S",		IO::SHAPE_S				},
+	{	"T",		IO::SHAPE_T				},
+	{	"Z",		IO::SHAPE_Z				},
 	{	"?n",	IO::LINES				},
 	{	"p",		IO::PRINT				},
 	{	"q",		IO::QUIT				},
+	{	")",		IO::ROTATE_CLOCKWISE },
+	{	"(",		IO::ROTATE_COUNTER	},
 	{	"?s",		IO::SCORE				},
 	{	"s",		IO::STEP					},
 	{	"t",		IO::DISPLAY_ACTIVE		}
 };
 
-/*
-//template <class T>
-//class cmd
-//{
-//	T data;
-//
-//public:
-//	cmd (T arg) {		data = arg;	  }
-//};
-*/
+
 
 class InputParser
 {
@@ -68,8 +75,7 @@ public:
 
 	int Read(int maxSize);
 	char* Read(int maxSize, char delim);
-//	void Read(int values);
-	
+
 
 	char buffer[200];
 	IO io;

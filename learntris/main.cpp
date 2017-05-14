@@ -1,3 +1,4 @@
+// http://en.cppreference.com/w/cpp/language/using_declaration
 //
 //  main.cpp
 //  learntris
@@ -18,14 +19,11 @@ Tetris* game = new Tetris;
 
 int main(int argc, const char * argv[])
 {
-	Matrix M;
-
-//	S_I S;
-//	S.Display();
-
 	while(1)
 	{
-		int c = IN.Read(200);
+//		IN.Read(200);
+		cin >> IN.buffer; cin.ignore();
+		IN.io = (IO)commands[IN.buffer];
 
 		switch(IN.io)
 		{
@@ -45,12 +43,24 @@ int main(int argc, const char * argv[])
 				game->LinesCleared();
 				break;
 
+			case IO::NEWLINE:
+				cout << endl;
+				break;
+
 			case IO::PRINT:
 				game->M.Print();
 				break;
 
 			case IO::QUIT:
 				exit(0);
+				break;
+
+			case IO::ROTATE_CLOCKWISE:
+				game->active->Rotate(1);
+				break;
+
+			case IO::ROTATE_COUNTER:
+				game->active->Rotate(-1);
 				break;
 
 			case IO::SCORE:
@@ -64,10 +74,45 @@ int main(int argc, const char * argv[])
 				break;
 			}
 
+			case IO::SHAPE_J:
+			{
+				Shape* temp = new S_J;
+				game->active = dynamic_cast<S_J*>(temp);
+				break;
+			}
+
+			case IO::SHAPE_L:
+			{
+				Shape* temp = new S_L;
+				game->active = dynamic_cast<S_L*>(temp);
+				break;
+			}
+
 			case IO::SHAPE_O:
 			{
 				Shape* temp = new S_O;
 				game->active = dynamic_cast<S_O*>(temp);
+				break;
+			}
+
+			case IO::SHAPE_S:
+			{
+				Shape* temp = new S_S;
+				game->active = dynamic_cast<S_S*>(temp);
+				break;
+			}
+
+			case IO::SHAPE_T:
+			{
+				Shape* temp = new S_T;
+				game->active = dynamic_cast<S_T*>(temp);
+				break;
+			}
+
+			case IO::SHAPE_Z:
+			{
+				Shape* temp = new S_Z;
+				game->active = dynamic_cast<S_Z*>(temp);
 				break;
 			}
 
@@ -85,14 +130,51 @@ int main(int argc, const char * argv[])
 
 Tetris::Tetris()
 {
-	score = 0;
-	int randShape = 0; //rand() % NUM_SHAPES;
+	time_t T;
+	time(&T);
+	T %= NUM_SHAPES;
 
-	if(randShape == TYPE::I)
+	LOG(T << endl);
+
+	score = 0;
+	int randShape = T;
+
+	randShape = 0;
+
+	switch((TYPE)randShape)
 	{
-		active = new Shape();
+		case TYPE::I:
+			active = new S_I;
+			break;
+
+		case TYPE::J:
+			active = new S_J;
+			break;
+
+		case TYPE::L:
+			active = new S_L;
+			break;
+
+		case TYPE::O:
+			active = new S_O;
+			break;
+
+		case TYPE::S:
+			active = new S_S;
+			break;
+
+		case TYPE::T:
+			active = new S_T;
+			break;
+
+		case TYPE::Z:
+			active = new S_Z;
+			break;
+
+		default:
+			active = new Shape;
+			break;
 	}
-	else if(randShape == 1) {}
 }
 
 

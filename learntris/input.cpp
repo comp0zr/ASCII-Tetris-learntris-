@@ -6,24 +6,14 @@
 //
 //
 
-//#include <iostream>
-//#include <stdlib.h>
-//#include <stdio.h>
-//#include <string.h>
-//#include <strings.h>
-
-
-
 #include "input.hpp"
-//#include "main.h"
-
 using namespace std;
 
 
 InputParser::InputParser()
 {}
 
-//cmd<IO>
+
 int InputParser::Read(int maxSize)
 {
 	do
@@ -38,7 +28,7 @@ int InputParser::Read(int maxSize)
 	return (int)commands[buffer];
 }
 
-//cmd<char*>
+
 char* InputParser::Read(int maxSize, char delim)
 {
 	string input;
@@ -47,9 +37,3 @@ char* InputParser::Read(int maxSize, char delim)
 	cin.clear();
 	return buffer;
 }
-
-//char* InputParser::Read(int values)
-//{
-//	cin >> buffer;
-//	return buffer;
-//}
